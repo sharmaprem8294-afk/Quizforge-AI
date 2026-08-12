@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Quizforge-AI quiz generator</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="backdrop"></div>
+
+<main class="stage">
+
+  <header class="brand">
+    <span class="brand-mark">Q</span>
+    <span class="brand-name">Quizforge</span>
+  </header>
+
+  <!-- ===== Setup screen ===== -->
+  <section id="screen-setup" class="screen glass-card active">
+    <h1>Generate a quiz on anything</h1>
+    <p class="subtitle">Pick a topic and let the model build the questions.</p>
+
+    <form id="quiz-form">
+      <div class="field-row">
+        <div class="field">
+          <label for="subject">Subject</label>
+          <input type="text" id="subject" placeholder="e.g. Computer Science" required maxlength="100">
+        </div>
+        <div class="field">
+          <label for="topic">Topic</label>
+          <input type="text" id="topic" placeholder="e.g. Binary search trees" required maxlength="200">
+        </div>
+      </div>
+
+      <div class="field">
+        <label>Difficulty</label>
+        <div class="difficulty-picker" role="radiogroup" aria-label="Difficulty">
+          <button type="button" class="diff-option" data-value="easy">Easy</button>
+          <button type="button" class="diff-option is-selected" data-value="medium">Medium</button>
+          <button type="button" class="diff-option" data-value="hard">Hard</button>
+        </div>
+        <svg class="difficulty-dial" width="140" height="80" viewBox="0 0 140 80" aria-hidden="true">
+          <path d="M10 70 A60 60 0 0 1 130 70" fill="none" stroke="var(--dial-track)" stroke-width="10" stroke-linecap="round"/>
+          <path id="dial-fill" d="M10 70 A60 60 0 0 1 70 10" fill="none" stroke="var(--dial-fill)" stroke-width="10" stroke-linecap="round" style="transition: d .35s ease, stroke .35s ease;"/>
+          <circle id="dial-knob" cx="70" cy="10" r="7" fill="var(--dial-fill)" style="transition: cx .35s ease, cy .35s ease, fill .35s ease;"/>
+        </svg>
+      </div>
+
+      <div class="field-row">
+        <div class="field">
+          <label for="num-questions">Questions <span id="num-questions-value">10</span></label>
+          <input type="range" id="num-questions" min="1" max="25" value="10">
+        </div>
+        <div class="field field-checkbox">
+          <label class="checkbox-label">
+            <input type="checkbox" id="include-explanations" checked>
+            Include explanations
+          </label>
+        </div>
+      </div>
+
+      <button type="submit" class="btn-primary" id="generate-btn">
+        <span class="btn-label">Generate quiz</span>
+      </button>
+
+      <p id="setup-error" class="error-text" hidden></p>
+    </form>
+  </section>
+
+  <!-- ===== Loading screen ===== -->
+  <section id="screen-loading" class="screen glass-card">
+    <div class="loader" aria-hidden="true"></div>
+    <p>Building your quiz…</p>
+  </section>
+
+  <!-- ===== Quiz screen ===== -->
+  <section id="screen-quiz" class="screen glass-card">
+    <div class="quiz-header">
+      <span id="question-counter">Question 1 of 10</span>
+      <div class="progress-track"><div id="progress-fill" class="progress-fill"></div></div>
+    </div>
+    <h2 id="question-text"></h2>
+    <div id="options-list" class="options-list"></div>
+    <div class="quiz-nav">
+      <button type="button" id="prev-btn" class="btn-secondary">Back</button>
+      <button type="button" id="next-btn" class="btn-primary">Next</button>
+    </div>
+  </section>
+
+  <!-- ===== Results screen ===== -->
+  <section id="screen-results" class="screen glass-card">
+    <h1>Your score</h1>
+    <p class="score-display"><span id="score-value">0</span><span class="score-total">/ 0</span></p>
+    <div id="results-list" class="results-list"></div>
+    <button type="button" id="retake-btn" class="btn-primary">Start a new quiz</button>
+  </section>
+
+</main>
+
+<script src="script.js"></script>
+</body>
+</html>
