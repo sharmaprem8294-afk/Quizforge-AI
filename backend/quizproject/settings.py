@@ -126,6 +126,8 @@ CORS_ALLOWED_ORIGINS = [
     "http://localhost:5500",
     "http://127.0.0.1:5501",
     "http://localhost:5501",
+    "https://quizforge-ai-0bm8.onrender.com",
+    
 ]
 
 # Add production frontend URLs from the environment.
@@ -155,12 +157,7 @@ CORS_ALLOWED_ORIGINS = list(dict.fromkeys(CORS_ALLOWED_ORIGINS))
 
 # Add production frontend URLs here when needed.
 CSRF_TRUSTED_ORIGINS = [
-    origin.strip()
-    for origin in os.environ.get(
-        "CSRF_TRUSTED_ORIGINS",
-        "",
-    ).split(",")
-    if origin.strip()
+    "https://quizforge-ai-0bm8.onrender.com",
 ]
 
 
