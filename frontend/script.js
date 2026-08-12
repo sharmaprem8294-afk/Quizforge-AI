@@ -1,5 +1,5 @@
 // Point this at your Django backend. Change the port if you run it elsewhere.
-const API_BASE_URL = "http://127.0.0.1:8000/api";
+const API_BASE_URL = "https://quizforge-backend-pt3b.onrender.com/api/generate-quiz/";
 
 // ---- Difficulty dial ----
 // Precomputed arc endpoints for a 3-position gauge (see the semicircle in index.html).
